@@ -1,5 +1,5 @@
 import redis
-import json
+#import json
 import os
 r = redis.Redis(host=os.environ['REDIS_HOST'], port=6379)
 
@@ -25,7 +25,7 @@ class Model:
 
     def deleteitem(self,item):
         if r.exists(item)==0:
-            return
+            return -1
         r.delete(item)
-        
+        return 0
 

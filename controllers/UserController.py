@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request, abort, jsonify
+from flask import request, jsonify
 from models.Model import Model
 
 def bakeryinventory():
@@ -8,18 +8,19 @@ def bakeryinventory():
 def addtomenu():
     data = request.get_json()
     key=list(data.keys())[0]
-    count,timetaken=Model().setitem(key,data)
-    return ("item:{} count {} cost {}".format(key,count,timetaken))
+    count,cost = Model().setitem(key,data)
+    return ("item ADDED:{} \n count:{} \n cost:{}".format(key,count,cost))
 
 def itemavailablty(item):
-    #check if can be added condition of not existing
+    #GET the data of a particular item, from path "/oven/<item>"
     count,cost=Model().getitem(item)
     if (count,cost)==(-1,-1):
-        return "sorry"
+        return "item currently not available"
     return jsonify({"count":count,"cost":cost})
     
 def removeitem(item):
-    Model().deleteitem(item)
+    if (Model().deleteitem(item)==-1):
+        return "item was not available to remove"
     return "{} DELETED from bakerybase".format(item)
 
 

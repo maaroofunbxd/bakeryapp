@@ -1,14 +1,24 @@
 
-run the app after creating a k8s cluster (kind cluster) ```helm install myapp helm```
+### App design
+MVC pattern using flask blueprint and routes.
 
-GET request at URL below produces the current items available
+### Running the app
+1. run the app after creating a k8s cluster (kind cluster) ```helm install myapp helm```
+    
+    portforward local port to access pods inside the cluster ```kubectl port-forward myapp-helm-xxxx 5000:5000``` 
 
-**localhost:5000/oven** - POST request in following JSON format: 
+
+2. also possible to run app using multiple containers in docker-compose ```docker-compose up```
+
+### Requests to server
+
+POST request to ```localhost:5000/oven```  is to be made with following JSON format body: 
 ```
-{"biryani":{
+{
+  "biryani":{
                 "count": 10,
                 "cost":  30
             }
 }
 ```
-also possible to run app using multiple containers in docker-compose ```docker-compose up```
+GET request to ```localhost:5000/oven```  lists the current items available
