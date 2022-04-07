@@ -52,6 +52,10 @@ spec:
             failureThreshold: 4
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      initContainers:
+        - name: init-redis-headlesss
+          image: busybox:1.28
+          command: ['sh', '-c', "until nslookup {{.Release.Name}}-redis-headless.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

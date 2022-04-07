@@ -1,10 +1,14 @@
-CRUD app using flask framework and redis database
 
-individual POST requests to the bakeryapp at localhost:5000/oven in following JSON format: 
+run the app after creating a k8s cluster (kind cluster) ```helm install myapp helm```
+
+GET request at URL below produces the current items available
+
+**localhost:5000/oven** - POST request in following JSON format: 
 ```
-{"<new item eg: salad>":{
-                            "count":< eg: 10>,
-                            "cost": < eg:30 >
-                          }
+{"biryani":{
+                "count": 10,
+                "cost":  30
+            }
 }
 ```
+also possible to run app using multiple containers in docker-compose ```docker-compose up```
