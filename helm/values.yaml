@@ -15,7 +15,7 @@ redis:
   auth:
     enabled: false
 
-redisservice: redis-headless
+redisservice: redis-master
 
 imagePullSecrets: []
 nameOverride: ""
