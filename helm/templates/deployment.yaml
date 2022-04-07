@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: 'REDIS_HOST'
-              value: {{ .Release.Name }}-redis-headless
+              value: {{ printf "%s-%s" .Release.Name .Values.redisservice }}
           ports:
             - name: http
               containerPort: 5000
@@ -55,7 +55,7 @@ spec:
       initContainers:
         - name: init-redis-headlesss
           image: busybox:1.28
-          command: ['sh', '-c', "until nslookup {{.Release.Name}}-redis-headless.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+          command: ['sh', '-c', "until nslookup {{.Release.Name}}-{{.Values.redisservice}}.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
