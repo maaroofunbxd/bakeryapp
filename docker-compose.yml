@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  api:
+    container_name: flaskcnr
+    image: 22561234/crud
+    depends_on:
+    - database
+    entrypoint: python app.py
+    environment:
+      REDIS_HOST: database
+    ports:
+    - '5000:5000'
+  database:
+    container_name: rediscnr
+    image: redis
+    ports:
+    - '6379:6379'
+    volumes:
+    - dbdata:/data
+volumes:
+  dbdata:
+  
