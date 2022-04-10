@@ -24,4 +24,6 @@ jobs:
       - name: Create kind cluster
         uses: helm/kind-action@v1.2.0
       - name: helmtest
-        run: helm install myapp helm
+        run: |
+          cd $GITHUB_WORKSPACE
+          helm install myapp helm
