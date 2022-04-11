@@ -2,7 +2,8 @@ version: '3.8'
 services:
   api:
     container_name: flaskcnr
-    image: .
+    #image: .
+    build: .
     depends_on:
     - database
     entrypoint: python app.py
