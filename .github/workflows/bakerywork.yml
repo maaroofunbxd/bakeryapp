@@ -16,7 +16,7 @@ jobs:
       - name: test compose
         run: |
          sleep 5
-         docker run --network container:flaskcnr -it alpine
+         docker run --network container:flaskcnr -i alpine
          curl -s --retry 10 --retry-connrefused http://localhost:5000/oven
 #         - uses: shogo82148/actions-setup-redis@v1
 #           with:      
