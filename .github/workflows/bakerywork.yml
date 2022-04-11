@@ -14,7 +14,7 @@ jobs:
       - run: cd $GITHUB_WORKSPACE
       - run: docker-compose up -d --build && sleep 10 && docker ps -a
       - name: test compose
-        run: docker run --network container:flaskcnr appropriate/curl -s http://localhost:5000/
+        run: docker run --network container:flaskcnr appropriate/curl -s http://localhost:5000/oven
     #         - uses: shogo82148/actions-setup-redis@v1
 #           with:      
 #             redis-version: '6.x'
