@@ -15,7 +15,8 @@ jobs:
           with:      
             redis-version: '6.x'
         - run: redis-cli ping
-        - run: docker run --env REDIS_HOST='localhost' --name ff --detach .
+        - run: docker build -t ct .
+        - run: docker run --env REDIS_HOST='localhost' --name ff --detach ct
         - run: |    
             sleep 5
             docker run --network container:ff appropriate/curl -s  --retry 10 --retry-connrefused http://localhost:5000/
