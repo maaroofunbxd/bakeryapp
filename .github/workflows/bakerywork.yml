@@ -14,8 +14,8 @@ jobs:
       - name: docker compose
         run: cd $GITHUB_WORKSPACE
       - run: docker-compose up -d
-       - name: test compose
-         run: |
+      - name: test compose
+        run: |
           sleep 5
           docker run --network container:flaskcnr -i alpine
           apk add curl
