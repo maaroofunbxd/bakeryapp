@@ -5,23 +5,6 @@ name: bakerywork
 on:
   push:
     branches: [ workflowtest ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - uses: actions/checkout@v2
-        # please refer to https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
-
-name: bakerywork
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
