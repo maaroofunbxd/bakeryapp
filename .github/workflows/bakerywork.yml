@@ -17,9 +17,7 @@ jobs:
       - name: test compose
         run: |
           sleep 5
-          docker run --network container:flaskcnr -i alpine
-          apk add curl
-          curl -s --retry 10 --retry-connrefused http://localhost:5000/oven
+          docker run --network container:flaskcnr -i busybox curl -s --retry 10 --retry-connrefused http://localhost:5000/
 #         - uses: shogo82148/actions-setup-redis@v1
 #           with:      
 #             redis-version: '6.x'
