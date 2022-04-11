@@ -20,7 +20,9 @@ jobs:
         - name: docker compose
           run: docker-compose up -d
         - name: test compose
-          run: docker run --network container:flaskcnr appropriate/curl -s --retry 10 --retry-connrefused http://localhost:5000/
+          run: |
+            sleep 10
+            docker run --network container:flaskcnr appropriate/curl -s --retry 10 --retry-connrefused http://localhost:5000/
 #       - name: Set up Helm
 #         uses: azure/setup-helm@v1
 #         with:
