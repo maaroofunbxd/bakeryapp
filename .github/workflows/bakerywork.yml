@@ -4,22 +4,40 @@ name: bakerywork
 
 on:
   push:
+    branches: [ workflowtest ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v2
+        # please refer to https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+
+name: bakerywork
+
+on:
+  push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - uses: actions/checkout@v2
-        - uses: KengoTODA/actions-setup-docker-compose@main
-          with:
-             version: '1.29.2' 
-        - name: docker compose
-          run: docker-compose up -d
-        - name: test compose
+        - uses: shogo82148/actions-setup-redis@v1
+            with:      
+              redis-version: '6.x'
+          run: redis-cli ping
+#        - uses: KengoTODA/actions-setup-docker-compose@main
+ #         with:
+  #           version: '1.29.2' 
+   #     - name: docker compose
+    #      run: docker-compose up -d
+     #   - name: test compose
           run: |
             sleep 5
             docker run --network container:flaskcnr appropriate/curl -s --retry 10 --retry-connrefused http://localhost:5000/
