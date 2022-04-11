@@ -3,8 +3,8 @@
 name: bakerywork
 
 on:
- # push:
- #   branches: [ workflowtest ]
+  push:
+    branches: [ workflowtest ]
 jobs:
   build:
     runs-on: ubuntu-latest
