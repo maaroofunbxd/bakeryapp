@@ -20,8 +20,7 @@ jobs:
         run: |
           sleep 5
           cd $GITHUB_WORKSPACE
-          newman run https://go.postman.co/workspace/My-Workspace~e8775128-33f0-40b5-8e83-efb3dd7da594/collection/20193730-8b14771a-8bab-4145-9d93-c358fa663718?action=share&creator=20193730
-        
+          newman run ./scripts/bakery.postman_collection.json        
     #         - uses: shogo82148/actions-setup-redis@v1
 #           with:      
 #             redis-version: '6.x'
