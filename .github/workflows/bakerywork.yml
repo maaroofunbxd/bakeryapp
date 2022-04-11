@@ -3,22 +3,22 @@
 name: bakerywork
 
 on:
-  push:
-    branches: [ workflowtest ]
+ # push:
+ #   branches: [ workflowtest ]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: docker compose
+      - name: github workspace
         run: cd $GITHUB_WORKSPACE
-      - run: docker-compose up -d
+        name: docker build 
+      - run: docker-compose up -d --build && sleep 10 && docker ps -a
       - name: test compose
         run: |
-          sleep 5
-          docker run --network container:flaskcnr -i busybox curl -s --retry 10 --retry-connrefused http://localhost:5000/
-#         - uses: shogo82148/actions-setup-redis@v1
+          docker run --network container:flaskcnr appropriate/curl -s --retry --retry-connrefused http://localhost:5000/
+    #         - uses: shogo82148/actions-setup-redis@v1
 #           with:      
 #             redis-version: '6.x'
 #         - run: redis-cli ping
