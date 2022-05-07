@@ -22,3 +22,5 @@ POST request to ```localhost:5000/oven```  is to be made with following JSON for
 }
 ```
 GET request to ```localhost:5000/oven```  lists the current items available
+
+-> follow github workflow for testing
