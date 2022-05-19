@@ -2,11 +2,32 @@
 
 name: bakerywork
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning' 
+        type: choice
+        options:
+        - info
+        - warning
+        - debug 
+      tags:
+        description: 'Test scenario tags'
+        required: false 
+        type: boolean
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+  
 
 jobs:
   build:
@@ -15,9 +36,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run: cd $GITHUB_WORKSPACE
-      - run: docker-compose up -d --build && sleep 10 && docker ps -a
-      - name: test compose
-        run: docker run --network container:flaskcnr appropriate/curl -s http://localhost:5000/oven
+      - run: |
+          echo "Log level: $LEVEL"
+          echo "Tags: $TAGS"
+          echo "Environment: $ENVIRONMENT"
+          echo "tagname: $tagname"
+        env:
+          LEVEL: ${{ github.event.inputs.logLevel }}
+          TAGS: ${{ github.event.inputs.tags }}
+          ENVIRONMENT: ${{ github.event.inputs.environment }}
+          tagname: ${{ github.event.release.tag_name }}
+     # - run: docker-compose up -d --build && sleep 10 && docker ps -a
+     # - name: test compose
+     #   run: docker run --network container:flaskcnr appropriate/curl -s http://localhost:5000/oven
 #       - name: Set up Helm
 #         uses: azure/setup-helm@v1
 #         with:
