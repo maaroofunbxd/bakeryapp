@@ -42,6 +42,7 @@ jobs:
           echo "Environment: $ENVIRONMENT"
           echo "tagname: $tagname"
           echo "headref: $GITHUB_HEAD_REF"
+          echo "PR_${GITHUB_ACTOR}_${GITHUB_HEAD_REF}
         env:
           LEVEL: ${{ github.event.inputs.logLevel }}
           TAGS: ${{ github.event.inputs.tags }}
