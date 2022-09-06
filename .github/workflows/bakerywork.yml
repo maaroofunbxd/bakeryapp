@@ -43,8 +43,7 @@ jobs:
           echo "tagname: $tagname"
           echo "headref: $GITHUB_HEAD_REF"
           echo "PR_${GITHUB_ACTOR}_${GITHUB_HEAD_REF}"
-          ls -la $PWD
-          ls -la $GITHUB_WORKSPACE
+          python $GITHUB_WORKSPACE/app.py
         env:
           LEVEL: ${{ github.event.inputs.logLevel }}
           TAGS: ${{ github.event.inputs.tags }}
