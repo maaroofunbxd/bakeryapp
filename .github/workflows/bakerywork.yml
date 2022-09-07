@@ -44,6 +44,8 @@ jobs:
           echo "headref: $GITHUB_HEAD_REF"
           echo "PR_${GITHUB_ACTOR}_${GITHUB_HEAD_REF}"
           python $GITHUB_WORKSPACE/app/main.py
+          ls $GITHUB_WORKSPACE
+          ls $GITHUB_WORKSPACE/app
           python $GITHUB_WORKSPACE/app/main1.py
         env:
           LEVEL: ${{ github.event.inputs.logLevel }}
