@@ -36,6 +36,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run: cd $GITHUB_WORKSPACE
+      - name: Setup tmate session
+        if: always()
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 20
       - run: |
           echo "Log level: $LEVEL"
           echo "Tags: $TAGS"
@@ -46,13 +50,13 @@ jobs:
           python $GITHUB_WORKSPACE/app/main.py
           ls $GITHUB_WORKSPACE
           ls $GITHUB_WORKSPACE/app
-          python $GITHUB_WORKSPACE/app/main1.py
         env:
           LEVEL: ${{ github.event.inputs.logLevel }}
           TAGS: ${{ github.event.inputs.tags }}
           ENVIRONMENT: ${{ github.event.inputs.environment }}
           
           tagname: ${{ github.event.release.tag_name }}
+      
      # - run: docker-compose up -d --build && sleep 10 && docker ps -a
      # - name: test compose
      #   run: docker run --network container:flaskcnr appropriate/curl -s http://localhost:5000/oven
