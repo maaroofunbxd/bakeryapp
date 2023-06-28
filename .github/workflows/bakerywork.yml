@@ -33,6 +33,22 @@ jobs:
 #        - uses: KengoTODA/actions-setup-docker-compose@main
  #         with:
   #           version: '1.29.2' 
+      - run: |
+          echo "Log level: $LEVEL"
+          echo "Tags: $TAGS"
+          echo "Environment: $ENVIRONMENT"
+          echo "tagname: $tagname"
+          echo "headref: $GITHUB_HEAD_REF"
+          echo "PR_${GITHUB_ACTOR}_${GITHUB_HEAD_REF}"
+        env:
+          LEVEL: ${{ github.event.inputs.logLevel }}
+          TAGS: ${{ github.event.inputs.tags }}
+          ENVIRONMENT: ${{ github.event.inputs.environment }}
+          
+          tagname: ${{ github.event.release.tag_name }}
+     # - run: docker-compose up -d --build && sleep 10 && docker ps -a
+     # - name: test compose
+     #   run: docker run --network container:flaskcnr appropriate/curl -s http://localhost:5000/oven
 #       - name: Set up Helm
 #         uses: azure/setup-helm@v1
 #         with:
