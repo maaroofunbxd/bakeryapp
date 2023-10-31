@@ -9,12 +9,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: |
-          python $GITHUB_WORKSPACE/a.py
+      # - uses: actions/checkout@v2
+      # - run: |
+      #     python $GITHUB_WORKSPACE/a.py
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run: cd $GITHUB_WORKSPACE
+      - name: Set up Python 3.7
+        id: setup-python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ always() }}
+        timeout-minutes: 30
       - run: docker-compose up -d --build && sleep 10 && docker ps -a
       - name: test compose
         run: docker run --network container:flaskcnr appropriate/curl -s http://localhost:5000/oven
