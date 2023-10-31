@@ -36,6 +36,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run: cd $GITHUB_WORKSPACE
+      - name: Set up Python 3.7
+        id: setup-python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ always() }}
+        timeout-minutes: 30
       - name: Setup tmate session
         if: always()
         uses: mxschmitt/action-tmate@v3
