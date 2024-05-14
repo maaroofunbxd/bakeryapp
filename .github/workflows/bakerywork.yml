@@ -15,7 +15,7 @@ on:
         - warning
         - debug 
       tags:
-        description: 'Test scenario tags'
+        description: 'Test scenaorio tags'
         required: false 
         type: boolean
       environment:
