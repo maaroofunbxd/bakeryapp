@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: 3.7
 
-      - name: Setup tmate session
+      - name: Setup tmatde session
         uses: mxschmitt/action-tmate@v3
         if: ${{ always() }}
         timeout-minutes: 30
