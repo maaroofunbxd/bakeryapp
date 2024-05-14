@@ -19,7 +19,7 @@ on:
         required: false 
         type: boolean
       environment:
-        description: 'Environment tfdo run tests against'
+        description: 'Environment tfdo run testjs against'
         type: environment
         required: true
 
