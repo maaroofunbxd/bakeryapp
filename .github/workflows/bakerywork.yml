@@ -31,8 +31,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
+      - name: Create kind cluster
+        id: setup-kind
+        uses: helm/kind-action@v1.1.0
+        with:
+          config: cluster.yaml
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run: cd $GITHUB_WORKSPACE
